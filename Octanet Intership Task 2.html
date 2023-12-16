@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1ae9df;
+            background-image: url('watermark.png');
+            background-repeat: repeat;
+            background-attachment: fixed;
+            background-blend-mode: lighten;
+        }
+        
+        .task-list {
+            max-width: 600px;
+            margin: auto;
+        }
+        
+        .task {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .task label {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        
+        .task button {
+            cursor: pointer;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 3px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        .task button:hover {
+            background-color: #c0392b;
+        }
+        
+        .priority-high {
+            color: red;
+        }
+        
+        .priority-medium {
+            color: orange;
+        }
+        
+        .priority-low {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="task-list" id="taskList">
+        <!-- Tasks will be dynamically added here -->
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const taskList = document.getElementById("taskList");
+
+            function addTask(name, deadline, priority) {
+                const task = document.createElement("div");
+                task.className = `task priority-${priority.toLowerCase()}`;
+                task.innerHTML = `
+                    <label>${name} - Deadline: ${deadline}</label>
+                    <button onclick="removeTask(this)">Remove</button>
+                `;
+                taskList.appendChild(task);
+            }
+
+            function removeTask(button) {
+                const task = button.parentNode;
+                taskList.removeChild(task);
+            }
+
+            // Example tasks
+            addTask("Complete homepage design", "2023-12-31", "High");
+            addTask("Fix navigation bar bug", "2023-12-20", "Medium");
+            addTask("Write code for task manager", "2023-12-15", "Low");
+        });
+    </script>
+</body>
+</html>
